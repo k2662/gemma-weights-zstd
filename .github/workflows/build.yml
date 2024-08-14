@@ -13,9 +13,10 @@ jobs:
       - name: compress
         run: |
           brew install zstd
-          curl -L -o model.tar.gz https://www.kaggle.com/api/v1/models/google/gemma-2/flax/gemma2-9b-it/1/download; zstd -19 model.tar.gz
+          wget https://www.kaggle.com/api/v1/models/google/gemma-2/flax/gemma2-9b-it/1/download
+          zstd -19 download
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.3.6
         with:
-          path: ./model.tar.gz.zst
+          path: ./download.zst
