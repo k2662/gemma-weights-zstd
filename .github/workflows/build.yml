@@ -1,0 +1,17 @@
+name: compress gemma weights with zstd
+
+on:
+  [push]
+
+jobs:
+  compress:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: compress
+        run: |
+          brew install zstd
+          curl -L -o model.tar.gz https://www.kaggle.com/api/v1/models/google/gemma-2/flax/gemma2-9b-it/1/download
+          zstd -19 model.tar.gz
